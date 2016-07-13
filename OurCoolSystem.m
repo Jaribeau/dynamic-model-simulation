@@ -1,8 +1,23 @@
-function [ xprime ] = OurCoolSystem( t, x, k1, k2, r, j)
+function [ xprime ] = OurCoolSystem( t, y)
 % The differential equation for our really really cool system
-% Output: 
+global k1 k3 r j h m g;
 
-xprime = [2; 2; 2; 2]; % State equation goes here!
+% y = [q1; p2; q3; p4];
+q1 = y(1);
+p2 = y(2);
+q3 = y(3);
+p4 = y(4);
+
+x1 = q1 / k1;
+x2 = q3 / k3;
+dL = x1+x2;
+m4 = m*(1 + dL/h);
+
+
+xprime = [  p2 /(r*j);
+            q3*r*k3 - (q1*k1)/r;
+            p4 / m4 - (p2*r)/j;
+            m4 * g - k3*q3];
     
 % Note:
 % m4 = chainMass( dL, m, L ) -> see function in chainMass.m 
