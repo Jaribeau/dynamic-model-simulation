@@ -1,6 +1,6 @@
 function [ xprime ] = OurCoolSystem( t, y)
 % The differential equation for our really really cool system
-global k1 k3 r j h m g;
+global k1 k3 r j h m g b;
 
 % y = [q1; p2; q3; p4];
 q1 = y(1);
@@ -8,16 +8,17 @@ p2 = y(2);
 q3 = y(3);
 p4 = y(4);
 
-x1 = q1 / k1;
-x2 = q3 / k3;
-dL = x1+x2;
-m4 = m*(1 + dL/h);
+% x1 = q1;
+% x2 = q3;
+dL = q1+q3;     
+% m4 = m*(1 + dL/h);
+% m4 = 0.5;
+m4 = m;
 
-
-xprime = [  p2 /(r*j);
-            q3*r*k3 - (q1*k1)/r;
-            p4 / m4 - (p2*r)/j;
-            m4 * g - k3*q3];
+xprime = [  p2 /(r*j);                          %q1
+            q3*r*k3 - (q1*k1)/r - b*p2/j;  %p2
+            p4 / m4 - (p2*r)/j;                 %q3
+            m4 * g - k3*q3];                    %p4
     
 % Note:
 % m4 = chainMass( dL, m, L ) -> see function in chainMass.m 
