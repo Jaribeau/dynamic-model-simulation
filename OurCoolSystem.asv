@@ -10,16 +10,17 @@ p4 = y(4);
 
 % x1 = q1;
 % x2 = q3;
-dL = q3 - q1;     
+dL = q1+q3;     
 
+m4 = m*(1 - dL/h);
+% m4 = 0.5;
 m4 = m;
-% m4 = m * (1 - (dL/h));
 
-xprime = [  p2*r/j;                             %q1
-            q3*r*k3 - (q1*k1)*r - b*p2/j;       %p2
+xprime = [  p2 /(r*j);                          %q1
+            q3*r*k3 - (q1*k1)/r - b*p2/j;       %p2
             p4 / m4 - (p2*r)/j;                 %q3
             m4 * g - k3*q3];                    %p4
-
+    
 % Note:
 % m4 = chainMass( dL, m, L ) -> see function in chainMass.m 
     
